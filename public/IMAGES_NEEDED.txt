@@ -1,0 +1,26 @@
+IMAGES REQUIRED FOR THIS WEBSITE
+==================================
+
+Please add the following images to the /public folder:
+
+1. Właściciel P&P Consulting.jpg
+   - Professional photo of Wojciech Jakubiak
+   - Recommended size: 800x1000px (portrait orientation)
+   - Used in: About section
+
+2. Shogun Wojtek.webp
+   - Image for blog post 1 "Japanese lesson with Wojtek (Process-San-Shogun)"
+   - Recommended size: 1200x750px (16:10 ratio)
+   - Used in: Blog section
+
+3. shogun wojtek 2.webp
+   - Image for blog post 2 "Japanese lesson no.2 #Kaizen #5S"
+   - Recommended size: 1200x750px (16:10 ratio)
+   - Used in: Blog section
+
+4. zdjęcie biurka.webp
+   - Photo showing a messy desk (example of what NOT to do)
+   - Recommended size: 1200x675px (16:9 ratio)
+   - Used in: Blog post 2 content
+
+NOTE: The website will work without these images, but placeholder boxes will be shown instead.
