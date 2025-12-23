@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { Menu, X, ChevronRight, User, BookOpen, Mail, Phone, Linkedin, CheckCircle, Award, TrendingUp, Target, BarChart2, ArrowRight, Brain, Cpu, Leaf, Send } from 'lucide-react';
+import { Menu, X, ChevronRight, User, BookOpen, Mail, Phone, Linkedin, CheckCircle, Award, TrendingUp, Target, BarChart2, ArrowRight, Brain, Cpu, Leaf, Send, ShoppingCart, Layout, Map, ClipboardList } from 'lucide-react';
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeModal, setActiveModal] = useState(null);
   const [activePost, setActivePost] = useState(null);
   
-  // Rozdzielone stany dla dwóch formularzy
   const [modalFormStatus, setModalFormStatus] = useState('idle'); 
   const [contactFormStatus, setContactFormStatus] = useState('idle');
 
@@ -32,25 +31,59 @@ const App = () => {
 
   const trainings = [
     {
-      id: 1,
+      id: 't1',
+      type: 'training',
       title: "Lean Six Sigma - Od Teorii do Praktyki",
       description: "Poznaj narzędzia 8D, Diagram Ishikawy, 5 Why oraz FMEA. Naucz się eliminować marnotrawstwo i optymalizować koszty w Twojej firmie.",
       target: "Dla Firm Produkcyjnych i Usługowych",
       icon: <TrendingUp size={24} color={colors.green} />
     },
     {
-      id: 2,
+      id: 't2',
+      type: 'training',
       title: "Podstawy zarządzania projektami",
       description: "Solidne fundamenty dla Twojego zespołu. Jak skutecznie dowozić projekty, zarządzać ryzykiem i harmonogramem.",
       target: "Dla Zespołów i Kadry Menadżerskiej",
       icon: <Target size={24} color={colors.blue} />
     },
     {
-      id: 3,
+      id: 't3',
+      type: 'training',
       title: "Mapowanie i Optymalizacja Procesów z AI",
       description: "Analiza przepływu wartości (VSM) oraz wykorzystanie nowoczesnych narzędzi AI do automatyzacji i usprawniania procesów.",
       target: "Warsztat Wdrożeniowy",
       icon: <Cpu size={24} color={colors.green} />
+    }
+  ];
+
+  // NOWA SEKCJA: Produkty / Narzędzia
+  const tools = [
+    {
+      id: 'p1',
+      type: 'product',
+      title: "Matryca RACI - Szablon Miro",
+      price: "49 PLN netto",
+      description: "Profesjonalny szablon do zarządzania odpowiedzialnością w zespole. Zawiera instrukcję jak definiować role (Responsible, Accountable, Consulted, Informed) i unikać konfliktów kompetencyjnych.",
+      includes: "Szablon Miro + PDF z instrukcją",
+      icon: <Layout size={32} color={colors.blue} />
+    },
+    {
+      id: 'p2',
+      type: 'product',
+      title: "Mapa Procesu + Warsztat Wdrożeniowy",
+      price: "599 PLN netto",
+      description: "Kompletny pakiet startowy. Otrzymasz rozbudowany szablon mapowania procesów w Miro ORAZ 2-godzinne szkolenie online 1:1, podczas którego nauczę Cię jak poprawnie modelować przepływy i znajdować wąskie gardła.",
+      includes: "Szablon Miro + 2h Konsultacji Online",
+      icon: <Map size={32} color={colors.green} />
+    },
+    {
+      id: 'p3',
+      type: 'product',
+      title: "SIPOC Masterclass + Szablon",
+      price: "349 PLN netto",
+      description: "SIPOC (Suppliers, Inputs, Process, Outputs, Customers) to klucz do zrozumienia biznesu 'z lotu ptaka'. Pakiet zawiera szablon oraz godzinne szkolenie, jak tworzyć dobre SIPOCi, które realnie pomagają w optymalizacji.",
+      includes: "Szablon Miro + 1h Szkolenia Online",
+      icon: <ClipboardList size={32} color={colors.blue} />
     }
   ];
 
@@ -170,7 +203,6 @@ const App = () => {
     const form = event.target;
     const data = new FormData(form);
     
-    // Zabezpieczenie na wypadek braku ID
     if (!FORMSPREE_ID || FORMSPREE_ID === 'TUTAJ_WKLEJ_SWOJ_KOD') {
       alert("Kod formularza nie został poprawnie skonfigurowany!");
       setStatus('error');
@@ -189,7 +221,6 @@ const App = () => {
       if (response.ok) {
         setStatus('success');
         form.reset();
-        // Resetujemy status po 5 sekundach
         setTimeout(() => {
           setStatus('idle');
           if (activeModal) setActiveModal(null);
@@ -201,6 +232,11 @@ const App = () => {
       setStatus('error');
     }
   };
+
+  // Helper do znajdowania aktywnego elementu (Szkolenie lub Produkt)
+  const getActiveItem = () => {
+    return trainings.find(t => t.id === activeModal) || tools.find(t => t.id === activeModal);
+  }
 
   const Navigation = () => (
     <nav className="fixed top-0 left-0 w-full bg-white/95 backdrop-blur-md shadow-sm z-50 border-b border-gray-100">
@@ -221,7 +257,7 @@ const App = () => {
           </div>
 
           <div className="hidden md:flex space-x-8 items-center">
-            {['O mnie', 'Oferta', 'Wiedza', 'Kontakt'].map((item) => (
+            {['O mnie', 'Oferta', 'Narzędzia', 'Wiedza', 'Kontakt'].map((item) => (
               <a
                 key={item}
                 href={`#${item.toLowerCase().replace(' ', '-')}`}
@@ -235,7 +271,7 @@ const App = () => {
               className="text-white px-6 py-2.5 rounded-full text-sm font-bold transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
               style={{background: `linear-gradient(90deg, ${colors.blue}, ${colors.green})`}}
             >
-              Zapytaj o ofertę
+              Współpraca
             </a>
           </div>
 
@@ -253,7 +289,7 @@ const App = () => {
       {isMenuOpen && (
         <div className="md:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
           <div className="px-4 pt-2 pb-6 space-y-2">
-            {['O mnie', 'Oferta', 'Wiedza', 'Kontakt'].map((item) => (
+            {['O mnie', 'Oferta', 'Narzędzia', 'Wiedza', 'Kontakt'].map((item) => (
               <a
                 key={item}
                 href={`#${item.toLowerCase().replace(' ', '-')}`}
@@ -301,8 +337,8 @@ const App = () => {
             >
               Oferta dla firm <ChevronRight size={20} className="ml-2" />
             </a>
-            <a href="#o-mnie" className="px-8 py-4 bg-white border text-slate-600 font-bold rounded-xl hover:bg-slate-50 transition-all flex items-center justify-center shadow-sm">
-              Poznaj moje kompetencje
+            <a href="#narzędzia" className="px-8 py-4 bg-white border text-slate-600 font-bold rounded-xl hover:bg-slate-50 transition-all flex items-center justify-center shadow-sm">
+              Narzędzia i Szablony
             </a>
           </div>
         </div>
@@ -382,6 +418,7 @@ const App = () => {
         </div>
       </section>
 
+      {/* OFERTA SZKOLENIOWA */}
       <section id="oferta" className="py-24 bg-slate-50 relative border-t border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -389,7 +426,6 @@ const App = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Szkolenia dla Twojej Firmy</h2>
             <p className="text-slate-600 max-w-2xl mx-auto text-lg">
               Prowadzę zamknięte szkolenia i warsztaty dopasowane do specyfiki Twojej organizacji.
-              Zostaw kontakt, aby porozmawiać o szczegółach.
             </p>
           </div>
 
@@ -416,6 +452,48 @@ const App = () => {
                     </button>
                   </div>
                 </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* NOWA SEKCJA: NARZĘDZIA (SKLEP) */}
+      <section id="narzędzia" className="py-24 bg-white border-t border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <span className="font-bold tracking-widest text-xs uppercase mb-3 block" style={{color: colors.blue}}>Sklep z Narzędziami</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Gotowe szablony i warsztaty</h2>
+            <p className="text-slate-600 max-w-2xl mx-auto text-lg">
+              Przyspiesz pracę swojego zespołu korzystając ze sprawdzonych szablonów w Miro oraz dedykowanych instruktaży.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {tools.map((tool) => (
+              <div key={tool.id} className="bg-slate-50 rounded-2xl p-8 border border-slate-200 hover:border-blue-300 transition-all flex flex-col relative overflow-hidden group">
+                <div className="mb-6 bg-white w-16 h-16 rounded-xl flex items-center justify-center shadow-sm">
+                  {tool.icon}
+                </div>
+                
+                <h3 className="text-xl font-bold text-slate-900 mb-2">{tool.title}</h3>
+                <div className="text-2xl font-bold mb-4" style={{color: colors.green}}>{tool.price}</div>
+                
+                <p className="text-slate-600 text-sm mb-6 flex-1 leading-relaxed">
+                  {tool.description}
+                </p>
+
+                <div className="bg-white rounded-lg p-3 mb-6 text-xs font-semibold text-slate-500 border border-slate-100">
+                   📦 Zawiera: {tool.includes}
+                </div>
+
+                <button
+                  onClick={() => setActiveModal(tool.id)}
+                  className="w-full py-3 rounded-xl font-bold text-sm transition-all shadow-sm hover:shadow-md flex items-center justify-center border-2"
+                  style={{borderColor: colors.blue, color: colors.blue}}
+                >
+                  Zamów teraz <ShoppingCart size={16} className="ml-2" />
+                </button>
               </div>
             ))}
           </div>
@@ -559,6 +637,7 @@ const App = () => {
         </div>
       </section>
 
+      {/* UNIWERSALNY MODAL (Szkolenia i Produkty) */}
       {activeModal && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center px-4 bg-slate-900/80 backdrop-blur-sm p-4 animate-in fade-in duration-200">
           <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 relative border-t-4" style={{borderColor: colors.blue}}>
@@ -575,32 +654,47 @@ const App = () => {
                   <CheckCircle size={40} style={{color: colors.green}} />
                 </div>
                 <h3 className="text-2xl font-bold text-slate-900 mb-2">Dziękuję!</h3>
-                <p className="text-slate-600">Twój e-mail został zapisany. Skontaktuję się z Tobą wkrótce.</p>
+                <p className="text-slate-600">Twoje zgłoszenie zostało przyjęte. Otrzymasz szczegóły na maila.</p>
               </div>
             ) : (
               <>
-                <h3 className="text-2xl font-bold text-slate-900 mb-1">Zapytaj o szkolenie</h3>
+                {/* Dynamiczny nagłówek w zależności od typu (szkolenie vs produkt) */}
+                <h3 className="text-xl font-bold text-slate-900 mb-1">
+                  {getActiveItem()?.type === 'product' ? 'Zamówienie narzędzia' : 'Zapytaj o szkolenie'}
+                </h3>
+                
                 <p className="text-sm font-bold mb-6 uppercase tracking-wide" style={{color: colors.blue}}>
-                  {trainings.find(t => t.id === activeModal)?.title}
+                  {getActiveItem()?.title}
                 </p>
+
                 <p className="text-slate-600 mb-6 text-sm">
-                  Jesteś zainteresowany tym tematem dla swojej firmy? Zostaw swój adres e-mail, a prześlę Ci szczegółową ofertę i zakres merytoryczny.
+                   {getActiveItem()?.type === 'product' 
+                     ? "Zostaw swój email. Prześlę Ci fakturę proforma, a po opłaceniu otrzymasz dostęp do materiałów."
+                     : "Jesteś zainteresowany tym tematem dla swojej firmy? Zostaw kontakt, porozmawiajmy o szczegółach."
+                   }
                 </p>
 
                 <form onSubmit={(e) => submitToFormspree(e, setModalFormStatus)} className="space-y-4">
-                  {/* Ukryte pole tematu - dynamicznie wstawiamy nazwę szkolenia */}
-                  <input type="hidden" name="_subject" value={`Zapytanie o szkolenie: ${trainings.find(t => t.id === activeModal)?.title}`} />
+                  {/* Ukryte pole tematu */}
+                  <input 
+                    type="hidden" 
+                    name="_subject" 
+                    value={`Nowe zgłoszenie: ${getActiveItem()?.title} (${getActiveItem()?.type === 'product' ? 'ZAKUP' : 'ZAPYTANIE'})`} 
+                  />
 
                   <div>
                     <input name="email" required placeholder="Twój adres Email" type="email" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:border-blue-500 outline-none transition-all" />
+                  </div>
+                   <div>
+                    <input name="phone" placeholder="Telefon (opcjonalnie)" type="tel" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:border-blue-500 outline-none transition-all" />
                   </div>
                   <button
                     disabled={modalFormStatus === 'submitting'}
                     type="submit"
                     className="w-full text-white font-bold py-3 rounded-xl transition-all mt-2 shadow-lg hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed"
-                    style={{backgroundColor: colors.green}}
+                    style={{backgroundColor: getActiveItem()?.type === 'product' ? colors.blue : colors.green}}
                   >
-                    {modalFormStatus === 'submitting' ? 'Wysyłanie...' : 'Wyślij zapytanie'}
+                    {modalFormStatus === 'submitting' ? 'Przetwarzanie...' : (getActiveItem()?.type === 'product' ? 'Zamawiam z obowiązkiem zapłaty' : 'Wyślij zapytanie')}
                   </button>
                   {modalFormStatus === 'error' && <p className="text-red-500 text-sm text-center">Błąd wysyłania. Spróbuj ponownie.</p>}
                 </form>
