@@ -6,7 +6,7 @@ const App = () => {
   const [activeModal, setActiveModal] = useState(null);
   const [activePost, setActivePost] = useState(null);
   const [showLegal, setShowLegal] = useState(false);
-  const [showPrivacy, setShowPrivacy] = useState(false); // NOWY STAN DLA POLITYKI PRYWATNOŚCI
+  const [showPrivacy, setShowPrivacy] = useState(false);
   
   const [modalFormStatus, setModalFormStatus] = useState('idle'); 
   const [contactFormStatus, setContactFormStatus] = useState('idle');
@@ -125,36 +125,112 @@ const App = () => {
       excerpt: "Kaizen, Gemba, Muda, Muri... these are all Japanese words that recur in our posts. Let's start with the basics: San, Shogun, and today's hero: MUDA.",
       content: (
         <div className="space-y-4 text-slate-700 leading-relaxed">
-          <p><strong>Kaizen, Gemba, Muda, Muri...</strong> these are all Japanese words that recur and will recur in our posts. Mainly because it was the Japanese who first recognised the importance of process management.</p>
+          <p><strong>1. Kaizen, Gemba, Muda, Muri...</strong> these are all Japanese words that recur and will recur in our posts. Mainly because it was the Japanese who first recognised the importance of process management.</p>
           <p>We invite you to a Japanese lesson with Wojtek (Process-San-Shogun) 🙂</p>
 
           <h4 className="text-xl font-bold mt-6" style={{color: colors.blue}}>Let's start with the basics:</h4>
-          <ul className="list-disc pl-5 space-y-2">
-            <li><strong>San (さん)</strong>, Mr. Miss. The most common Japanese suffix...</li>
-            <li><strong>Shogun (将軍)</strong>, commander-in-chief. Colloquially: Someone wild, everywhere, knows everything...</li>
+          <ul className="list-disc pl-5 space-y-4">
+            <li>
+              <strong>San (さん)</strong>, Mr. Miss.<br/>
+              The most common Japanese suffix, used for both women and men. San is a commonly used equivalent of the Polish "pan / pani" or English “Mr. / Miss”, which can be added to names, surnames, and occupational names (e.g. kokku-san = chef or toshokanin-san = librarian)
+            </li>
+            <li>
+              <strong>Shogun (将軍)</strong>, shogun<br/>
+              Commander-in-chief, general, commander-in-chief of the armed forces.<br/>
+              Colloquially: Someone wild, everywhere, knows everything, someone cunning.<br/>
+              <em>“- On Friday he managed to go to the cinema, museum and go to Warsaw”<br/>
+              - What a SHOGUN he is! 😊”</em>
+            </li>
           </ul>
 
           <h4 className="text-xl font-bold mt-6" style={{color: colors.blue}}>And Today's hero… MUDA (無駄)</h4>
-          <p>This is a Japanese word meaning "futility", "uselessness", or "wastefulness". Colloquially: Muda is simply a waste/loss. Something we do, whether in life or at work, and it does not bring value to our customers.</p>
+          <p>This is a Japanese word meaning "futility", "uselessness", or "wastefulness".<br/>
+          And colloquially: Muda is simply a waste/loss. Something we do, whether in life or at work, and it does not bring value to our customers, even if that customer is ourselves 😊</p>
 
-          <h4 className="text-xl font-bold text-slate-900 mt-6">Let's focus on the 7 Wastes (Muda):</h4>
+          <h4 className="text-xl font-bold text-slate-900 mt-6">OK, let's focus on MUDA!</h4>
+          <p>To better understand what Muda is, we can divide it into categories.</p>
 
-          <div className="grid gap-4 mt-4">
-            <div className="bg-slate-50 p-4 rounded-lg border-l-4" style={{borderColor: colors.green}}>
-              <h5 className="font-bold" style={{color: colors.green}}>1. Overproduction</h5>
-              <p className="text-sm mt-1">Producing reports that no one reads.</p>
+          <div className="grid gap-6 mt-6">
+            <div className="bg-slate-50 p-5 rounded-lg border-l-4" style={{borderColor: colors.green}}>
+              <h5 className="font-bold text-lg" style={{color: colors.green}}>Overproduction</h5>
+              <p className="text-sm mt-1">Producing products, services or information in isolation from reported demand.</p>
+              <div className="mt-3 text-xs text-slate-600 bg-white p-2 rounded border border-slate-100">
+                <p><strong>Life:</strong> Why do we need so much food for Christmas… Who will eat it….?</p>
+                <p><strong>Business:</strong> Producing report than no one read or need, Double checking</p>
+              </div>
             </div>
-            <div className="bg-slate-50 p-4 rounded-lg border-l-4" style={{borderColor: colors.green}}>
-              <h5 className="font-bold" style={{color: colors.green}}>2. Waiting</h5>
-              <p className="text-sm mt-1">Waiting for approvals or signatures.</p>
+
+            <div className="bg-slate-50 p-5 rounded-lg border-l-4" style={{borderColor: colors.green}}>
+              <h5 className="font-bold text-lg" style={{color: colors.green}}>Inventory</h5>
+              <p className="text-sm mt-1">More than the minimum necessary amount of raw materials, semi-finished products, work in progress and finished goods.</p>
+              <div className="mt-3 text-xs text-slate-600 bg-white p-2 rounded border border-slate-100">
+                <p><strong>Life:</strong> out-of-date food, out-of-fashion clothing, parcels packed in extra cartons which are 4 times too big</p>
+                <p><strong>Business:</strong> obsolete files and documentation</p>
+              </div>
             </div>
-            <div className="bg-slate-50 p-4 rounded-lg border-l-4 border-red-500">
-              <h5 className="font-bold text-red-700">8. Unused potential</h5>
-              <p className="text-sm mt-1">Not involving people to solve their problems.</p>
+
+            <div className="bg-slate-50 p-5 rounded-lg border-l-4" style={{borderColor: colors.green}}>
+              <h5 className="font-bold text-lg" style={{color: colors.green}}>Errors and defects</h5>
+              <p className="text-sm mt-1">Defective products and improperly performed services.</p>
+              <div className="mt-3 text-xs text-slate-600 bg-white p-2 rounded border border-slate-100">
+                <p><strong>Life:</strong> Okay, I'm a master at this... why do I need a manual... Unfortunately the truth is that it is easier to break something than to fix it later...</p>
+                <p><strong>Business:</strong> Reworks, incomplete data, wrong data, etc.</p>
+              </div>
+            </div>
+
+            <div className="bg-slate-50 p-5 rounded-lg border-l-4" style={{borderColor: colors.green}}>
+              <h5 className="font-bold text-lg" style={{color: colors.green}}>Waiting</h5>
+              <p className="text-sm mt-1">Unnecessary waiting in the process of waiting machines or people for the necessary materials, tools, instructions or information necessary to perform the work.</p>
+              <div className="mt-3 text-xs text-slate-600 bg-white p-2 rounded border border-slate-100">
+                <p><strong>Life:</strong> The time when nothing is happening... waiting for the "impulse" that will enable us to take action... For example, the bus is late...</p>
+                <p><strong>Business:</strong> Waiting for approvals or signatures, waitting on meetings for all attendance.</p>
+              </div>
+            </div>
+
+            <div className="bg-slate-50 p-5 rounded-lg border-l-4" style={{borderColor: colors.green}}>
+              <h5 className="font-bold text-lg" style={{color: colors.green}}>Over processing</h5>
+              <p className="text-sm mt-1">Any activity that is not necessary to produce a product or service with the parameters and quality level required by the customer.</p>
+              <div className="mt-3 text-xs text-slate-600 bg-white p-2 rounded border border-slate-100">
+                <p><strong>Life:</strong> - I made you coffee just the way you like it. - Damn dude, I've already had two, I won't drink a third.</p>
+                <p><strong>Business:</strong> Entering the same data in a few systems, multiplying signatures or approvals.</p>
+              </div>
+            </div>
+
+            <div className="bg-slate-50 p-5 rounded-lg border-l-4" style={{borderColor: colors.green}}>
+              <h5 className="font-bold text-lg" style={{color: colors.green}}>Unnecessary transportation</h5>
+              <p className="text-sm mt-1">Unnecessary movement of products or materials both within and between organizations.</p>
+              <div className="mt-3 text-xs text-slate-600 bg-white p-2 rounded border border-slate-100">
+                <p><strong>Life:</strong> - Damn, I could have planned this route better, I spent another hour driving back and forth...</p>
+                <p><strong>Business:</strong> Complex information hard to get.</p>
+              </div>
+            </div>
+
+            <div className="bg-slate-50 p-5 rounded-lg border-l-4" style={{borderColor: colors.green}}>
+              <h5 className="font-bold text-lg" style={{color: colors.green}}>Unnecessary movement</h5>
+              <p className="text-sm mt-1">Any movements of people that are not directly related to adding value.</p>
+              <div className="mt-3 text-xs text-slate-600 bg-white p-2 rounded border border-slate-100">
+                <p><strong>Life:</strong> For example, while cleaning your apartment you are constantly looking for helpful accessories that are in different places... Did you know that apparently every person wastes an average of 90 minutes every day finding the things they need?</p>
+                <p><strong>Business:</strong> searching for files, sorting through data.</p>
+              </div>
+            </div>
+
+            <div className="bg-slate-50 p-5 rounded-lg border-l-4 border-red-500">
+              <h5 className="font-bold text-lg text-red-700">Unused potential of employees</h5>
+              <p className="text-sm mt-1">The organization's failure to use the ideas, creativity, competences, talents, as well as the available working time of its employees, and their performance of tasks below their competences.</p>
+              <div className="mt-3 text-xs text-slate-600 bg-white p-2 rounded border border-slate-100">
+                <p><strong>Life:</strong> This is because my mother told me to clean and at the same time I could practice basketball to get to the NBA 😊</p>
+                <p><strong>Business:</strong> not involving people to solve their problems, doing “easy” job by highly paid employees.</p>
+              </div>
             </div>
           </div>
 
-          <p className="mt-6 italic">That's all for today! If you go so far write in the comments how it's DELIVERY in Japanese?<br/>Regards, Process - SAN - Shogun Wojtek 🙂</p>
+          <p className="mt-8 italic text-slate-600 border-t pt-4">
+            That's all for today!<br/>
+            If you go so far write in the comments how it's DELIVERY in Japanese?<br/><br/>
+            Regards,<br/>
+            ありがとう。<br/>
+            <strong>Process - SAN - Shogun Wojtek 🙂</strong>
+          </p>
         </div>
       )
     },
@@ -167,36 +243,38 @@ const App = () => {
       content: (
         <div className="space-y-4 text-slate-700 leading-relaxed">
           <p>We are continuing our adventure with KAIZEN and since it is spring cleaning time, today I would like to tell you about the 5S method.</p>
-          <p>The 5S methodology originates directly from manufacturing, where the need to maintain order and standardization is linked not only to productivity but actually also to safety. Business services are only slowly discovering how to use the 5S method and transfer it straight from production to office work.</p>
+          <p>The 5S methodology originates directly from manufacturing, where the need to maintain order and standardization is linked not only to productivity but actually also to safety. Business services are only slowly discovering how to use the 5S method and transfer it straight from production to office work. Today, I would like to share a few examples with you.</p>
+          <p>But starting from the beginning...<br/>5S is a system for organizing and maintaining a clean, efficient, and productive work environment. It has its origins in Japanese manufacturing practices, and the five words beginning with S are originally seiri, seiton, seiso, seiketsu, and shitsuke. These have been translated as sort, set, shine, standardize and sustain – giving five words beginning with S in English as well.</p>
 
           <h4 className="text-xl font-bold mt-6 border-b pb-2" style={{color: colors.blue}}>The 5S System:</h4>
 
           <div className="space-y-6 mt-4">
             <div>
-              <h5 className="text-lg font-bold" style={{color: colors.green}}>1. Sort (Seiri)</h5>
-              <p>When in doubt, throw it out. Do you keep different versions of the same document? Think about the time wasted looking through files.</p>
+              <h5 className="text-lg font-bold" style={{color: colors.green}}>1. Sort (seiri)</h5>
+              <p>The first step in the 5S methodology is to sort. Sort: when in doubt, throw it out, delete it or archive it. Have you looked at your computer’s hard drive lately? Do you keep different versions of the same document? Do you struggle to identify the latest version? Think about the amount of time wasted looking through files, trying to find the correct one. How about the time wasted in finding the latest version of a file on a shared drive. Would your work benefit from having only the documents used on a regular basis stored in the area? Would your teammates benefit from having only a single copy of relevant materials present?</p>
             </div>
             <div>
-              <h5 className="text-lg font-bold" style={{color: colors.green}}>2. Set in order (Seiton)</h5>
-              <p>Arrange and organize things systematically. File shares, folder structures and naming conventions arranged in a logical fashion.</p>
+              <h5 className="text-lg font-bold" style={{color: colors.green}}>2. Set (in order) (seiton)</h5>
+              <p>Once you have removed any unnecessary items you can arrange and organize the things that you need in a way that is systematic and logical. decide where to keep necessary items and then organize accordingly. File shares, folder structures and naming conventions arranged in a logical fashion to promote easy access is a very large opportunity . . . in any organization.<br/>Even in digital platforms, arranging virtual files on computers applies to this practice. Organizing digital files into folders with clear labels allows employees to locate documents swiftly, minimizing time spent searching.</p>
             </div>
             <div>
-              <h5 className="text-lg font-bold" style={{color: colors.green}}>3. Shine (Seiso)</h5>
-              <p>Is the area clean and free of data clutter? Clutter leads to waste and storage costs money.</p>
+              <h5 className="text-lg font-bold" style={{color: colors.green}}>3. Shine (seiso)</h5>
+              <p>This step relates to ensuring that your workspace is kept clean and is properly maintained. Do yourself a favor . . . look at any data storage location and ask “is the area clean and free of data clutter?”. Is my CRM basket/Essa workflow clean from trash?. There are a number of reasons to regularly clean files etc. First and foremost, clutter leads to waste. Second, storage costs money. Third, it exposes the organization to unnecessary risk. Get in the habit of cleaning at appropriate predetermined intervals.</p>
             </div>
             <div>
-              <h5 className="text-lg font-bold" style={{color: colors.green}}>4. Standardize (Seiketsu)</h5>
-              <p>Creating guidelines and procedures. Develop database naming conventions, folder and file name standards.</p>
+              <h5 className="text-lg font-bold" style={{color: colors.green}}>4. Standardize (seiketsu)</h5>
+              <p>The fourth step in the 5S methodology is to standardize. This step involves creating a set of guidelines and procedures for maintaining the workspace. This includes documenting the previous three steps and establishing a regular schedule for their implementation..<br/>In business: aim to standardize day-to-day work and execute processes according to SOPs. Develop database naming conventions, folder and file name standards, etc. Regularly review methods, and as new methods are developed, document them quickly and have them adopted by others.</p>
             </div>
             <div>
-              <h5 className="text-lg font-bold" style={{color: colors.green}}>5. Sustain (Shitsuke)</h5>
-              <p>Creating a culture of continuous improvement, where the previous four steps are consistently followed.</p>
+              <h5 className="text-lg font-bold" style={{color: colors.green}}>5. Sustain (shitsuke)</h5>
+              <p>The final step in the 5S methodology is to sustain. This step involves creating a culture of continuous improvement, where the previous four steps are consistently followed, and the workspace is continually optimized…</p>
             </div>
           </div>
 
           <div className="mt-8 p-4 bg-red-50 border border-red-200 rounded-lg">
-            <p className="font-bold text-red-800 mb-2">Please remember!</p>
-            <p>5S is often misunderstood. Remember it's not just cleaning, it's a methodology. <br/>(See the photo of the desk below - that's how it SHOULDN'T look! 🙂)</p>
+            <p className="font-bold text-red-800 mb-2 text-center uppercase">👇👇👇 Please remember 👇👇👇</p>
+            <p className="font-bold text-slate-800">5S is often misunderstood and twisted into this</p>
+            <p className="text-sm mt-2">This is more or less what my desk looked like when I worked in one of my previous company, and unfortunately it's no joke. Remember its not 5S its some kind of bullsh*t…. 🙂</p>
           </div>
 
           <div className="my-8 rounded-xl overflow-hidden shadow-lg border border-gray-200">
@@ -206,7 +284,10 @@ const App = () => {
             <p className="text-center text-xs text-gray-500 p-2 italic">Don't try this at work! ;)</p>
           </div>
 
-          <p className="mt-6 italic">Regards, Your Process-San-Shogun Wojtek 🙂</p>
+          <p className="mt-6 italic border-t pt-4">
+            Regards,<br/>
+            <strong>Your Process-San-Shogun Wojtek 🙂</strong>
+          </p>
         </div>
       )
     },
@@ -271,26 +352,23 @@ const App = () => {
         <div className="flex justify-between items-center h-20">
           <div className="flex-shrink-0 flex items-center cursor-pointer" onClick={() => window.scrollTo(0,0)}>
             
-            {/* ZMIANA: Zamiast tekstu P&P, wstawiamy obrazek logo */}
             <div className="flex items-center gap-4">
               <img 
                 src="logo2.jpg" 
                 alt="P&P Consulting Logo" 
                 className="h-16 w-auto object-contain"
                 onError={(e) => {
-                  e.target.style.display = 'none'; // Jeśli plik nie istnieje, ukryj obrazek
-                  e.target.nextSibling.style.display = 'flex'; // I pokaż fallback tekstowy
+                  e.target.style.display = 'none';
+                  e.target.nextSibling.style.display = 'flex'; 
                 }}
               />
               
-              {/* Fallback (gdyby obrazek się nie załadował) */}
               <div className="hidden flex-col" id="logo-fallback">
                 <span className="text-xl font-extrabold tracking-tight leading-none" style={{color: colors.textMain}}>
                   P&P <span style={{color: colors.blue}}>Consulting</span>
                 </span>
               </div>
 
-              {/* Subtitle - Zostaje zgodnie z życzeniem */}
               <div className="flex flex-col justify-center h-full pt-1 border-l-2 border-slate-200 pl-4">
                 <span className="text-[10px] uppercase tracking-widest text-slate-400 font-bold leading-tight">
                   Process &<br/>Project Management
@@ -646,6 +724,7 @@ const App = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-16">
             <div>
+              {/* Sekcja logo została usunięta zgodnie z życzeniem */}
               <h2 className="text-3xl font-bold mb-6">Porozmawiajmy o Twoim biznesie</h2>
               <p className="text-slate-300 mb-10 text-lg leading-relaxed">
                 Szukasz wsparcia w optymalizacji procesów lub wdrożeniu AI?
