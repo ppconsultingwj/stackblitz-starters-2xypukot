@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Menu, X, ChevronRight, User, BookOpen, Mail, Phone, Linkedin, CheckCircle, Award, TrendingUp, Target, BarChart2, ArrowRight, Brain, Cpu, Leaf, Send, ShoppingCart, Layout, Map, ClipboardList } from 'lucide-react';
+import { Menu, X, ChevronRight, User, BookOpen, Mail, Phone, Linkedin, CheckCircle, Award, TrendingUp, Target, BarChart2, ArrowRight, Brain, Cpu, Leaf, Send, ShoppingCart, Layout, Map, ClipboardList, HelpCircle, FileText } from 'lucide-react';
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeModal, setActiveModal] = useState(null);
   const [activePost, setActivePost] = useState(null);
+  const [showLegal, setShowLegal] = useState(false);
   
   const [modalFormStatus, setModalFormStatus] = useState('idle'); 
   const [contactFormStatus, setContactFormStatus] = useState('idle');
@@ -28,6 +29,34 @@ const App = () => {
     phone: "+48 501 341 095",
     linkedin: "https://www.linkedin.com/in/wojciech-jakubiak-11835963/"
   };
+
+  // Logotypy firm - PLIKI DO WGRANIA
+  const trustedCompanies = [
+    { name: "Trans.EU", logo: "logo_trans.png" },
+    { name: "Smartlunch", logo: "logo_smartlunch.png" },
+    { name: "HP", logo: "logo_hp.png" },
+    { name: "LG Electronics", logo: "logo_lg.png" }
+  ];
+
+  // FAQ
+  const faqItems = [
+    {
+      question: "Jak wygląda proces zakupu i płatności?",
+      answer: "Działam w oparciu o tradycyjne przelewy, co pozwala na elastyczność i brak prowizji pośredników. Po wypełnieniu formularza zamówienia, otrzymasz ode mnie maila z danymi do przelewu (numer konta). Po zaksięgowaniu wpłaty, wysyłam zamówione materiały."
+    },
+    {
+      question: "Czy otrzymam fakturę?",
+      answer: "Tak. Prowadzę legalną działalność gospodarczą. Do każdego zamówienia wystawiam fakturę (dla firm) lub rachunek imienny (dla osób prywatnych). Dokument otrzymasz w formacie PDF na maila."
+    },
+    {
+      question: "Czy muszę mieć firmę, żeby kupić narzędzia?",
+      answer: "Nie. Oferta skierowana jest zarówno do firm (B2B), jak i osób prywatnych chcących podnieść swoje kompetencje. W przypadku osób prywatnych korzystam ze zwolnienia z kasy fiskalnej (płatność wyłącznie na konto)."
+    },
+    {
+      question: "Jak szybko otrzymam dostęp do materiałów?",
+      answer: "Materiały cyfrowe (szablony Miro, PDF) wysyłam zazwyczaj w ciągu 24 godzin od zaksięgowania wpłaty na koncie. W przypadku szkoleń online, termin ustalamy indywidualnie po opłaceniu zamówienia."
+    }
+  ];
 
   const trainings = [
     {
@@ -56,7 +85,6 @@ const App = () => {
     }
   ];
 
-  // NOWA SEKCJA: Produkty / Narzędzia
   const tools = [
     {
       id: 'p1',
@@ -195,7 +223,6 @@ const App = () => {
     }
   ];
 
-  // --- FUNKCJA WYSYŁAJĄCA DANE DO FORMSPREE ---
   const submitToFormspree = async (event, setStatus) => {
     event.preventDefault();
     setStatus('submitting');
@@ -233,7 +260,6 @@ const App = () => {
     }
   };
 
-  // Helper do znajdowania aktywnego elementu (Szkolenie lub Produkt)
   const getActiveItem = () => {
     return trainings.find(t => t.id === activeModal) || tools.find(t => t.id === activeModal);
   }
@@ -500,6 +526,58 @@ const App = () => {
         </div>
       </section>
 
+      {/* SEKCJA ZAUFALI MI - Z LOGOTYPAMI OBRAZKOWYMI */}
+      <section className="py-20 bg-slate-50 border-t border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <span className="font-bold tracking-widest text-xs uppercase mb-3 block" style={{color: colors.green}}>Doświadczenie</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Zaufało mi</h2>
+          </div>
+          
+          <div className="flex flex-wrap justify-center items-center gap-12 md:gap-20 opacity-70 hover:opacity-100 transition-all duration-500">
+             {trustedCompanies.map((company, index) => (
+               <div key={index} className="flex items-center justify-center h-16 w-32 md:w-40 grayscale hover:grayscale-0 transition-all duration-300">
+                  <img 
+                    src={company.logo} 
+                    alt={`Logo ${company.name}`} 
+                    className="max-h-full max-w-full object-contain"
+                    onError={(e) => {
+                      e.target.style.display='none'; 
+                      e.target.nextSibling.style.display='block';
+                    }} 
+                  />
+                  {/* Fallback tekstowy (pokazuje się, gdy brakuje pliku) */}
+                  <span className="hidden text-xl font-bold text-slate-400">{company.name}</span>
+               </div>
+             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ SECTION */}
+      <section className="py-24 bg-white border-t border-slate-200">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <span className="font-bold tracking-widest text-xs uppercase mb-3 block" style={{color: colors.blue}}>FAQ</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Najczęściej zadawane pytania</h2>
+          </div>
+
+          <div className="space-y-6">
+            {faqItems.map((item, index) => (
+              <div key={index} className="bg-slate-50 rounded-xl p-6 border border-slate-100 hover:border-blue-100 transition-colors">
+                <div className="flex items-start">
+                  <HelpCircle className="w-6 h-6 mr-4 mt-1 flex-shrink-0" style={{color: colors.blue}} />
+                  <div>
+                    <h3 className="text-lg font-bold text-slate-900 mb-2">{item.question}</h3>
+                    <p className="text-slate-600 leading-relaxed text-sm">{item.answer}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section id="wiedza" className="py-24 bg-white border-t border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
@@ -629,13 +707,48 @@ const App = () => {
               )}
             </div>
           </div>
+        </div>
+      </section>
 
-          <div className="border-t border-slate-700 mt-20 pt-8 flex flex-col md:flex-row justify-between items-center text-slate-400 text-sm">
-            <p>© 2025 {personalInfo.company}.</p>
+      {/* STOPKA (FOOTER) */}
+      <footer className="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-4 gap-8 mb-8">
+            <div className="col-span-2">
+              <h3 className="text-white font-bold text-xl mb-4">P&P Consulting</h3>
+              <p className="text-sm leading-relaxed max-w-sm">
+                Pomagam firmom i managerom odzyskać kontrolę nad procesami.
+                Lean Six Sigma, AI i skuteczne zarządzanie projektami w jednym miejscu.
+              </p>
+            </div>
+            <div>
+              <h4 className="text-white font-bold mb-4">Nawigacja</h4>
+              <ul className="space-y-2 text-sm">
+                <li><a href="#o-mnie" className="hover:text-blue-400 transition-colors">O mnie</a></li>
+                <li><a href="#oferta" className="hover:text-blue-400 transition-colors">Oferta B2B</a></li>
+                <li><a href="#narzędzia" className="hover:text-blue-400 transition-colors">Narzędzia</a></li>
+                <li><a href="#wiedza" className="hover:text-blue-400 transition-colors">Blog</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-white font-bold mb-4">Legal</h4>
+              <ul className="space-y-2 text-sm">
+                <li><a href="#" className="hover:text-blue-400 transition-colors">Polityka Prywatności</a></li>
+                <li>
+                  <button onClick={() => setShowLegal(true)} className="hover:text-blue-400 transition-colors text-left">
+                    Regulamin Sklepu
+                  </button>
+                </li>
+                <li><a href="#kontakt" className="hover:text-blue-400 transition-colors">Kontakt</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center text-xs">
+            <p>© 2025 {personalInfo.company}. Wszelkie prawa zastrzeżone.</p>
             <p className="mt-2 md:mt-0 opacity-50">Designed for Leaders</p>
           </div>
         </div>
-      </section>
+      </footer>
 
       {/* UNIWERSALNY MODAL (Szkolenia i Produkty) */}
       {activeModal && (
@@ -675,7 +788,6 @@ const App = () => {
                 </p>
 
                 <form onSubmit={(e) => submitToFormspree(e, setModalFormStatus)} className="space-y-4">
-                  {/* Ukryte pole tematu */}
                   <input 
                     type="hidden" 
                     name="_subject" 
@@ -704,6 +816,55 @@ const App = () => {
         </div>
       )}
 
+      {/* MODAL REGULAMINU */}
+      {showLegal && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center px-4 bg-slate-900/90 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full flex flex-col max-h-[85vh]">
+            <div className="p-6 border-b border-slate-100 flex justify-between items-center">
+              <h3 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+                <FileText size={20} className="text-blue-600" /> Regulamin Sklepu
+              </h3>
+              <button 
+                onClick={() => setShowLegal(false)}
+                className="text-slate-400 hover:text-slate-600 transition-colors bg-slate-100 rounded-full p-1"
+              >
+                <X size={20} />
+              </button>
+            </div>
+            
+            <div className="p-8 overflow-y-auto prose prose-slate prose-sm text-slate-600">
+              <h4>1. Postanowienia ogólne</h4>
+              <p>Niniejszy regulamin określa zasady korzystania ze sklepu internetowego P&P Consulting, dostępnego pod adresem strony internetowej. Właścicielem jest P&P Consulting Wojciech Jakubiak.</p>
+              
+              <h4>2. Definicje</h4>
+              <p><strong>Klient</strong> – osoba fizyczna, osoba prawna lub jednostka organizacyjna składająca Zamówienie.<br/><strong>Produkt</strong> – dostępna w ofercie usługa cyfrowa lub materiał edukacyjny (np. szablon, szkolenie).</p>
+              
+              <h4>3. Składanie zamówień</h4>
+              <p>Zamówienia przyjmowane są poprzez formularz kontaktowy na stronie. Po złożeniu zamówienia Klient otrzymuje e-mail zwrotny z danymi do płatności (przelew tradycyjny).</p>
+              
+              <h4>4. Płatności i Dostawa</h4>
+              <p>Realizacja zamówienia następuje po zaksięgowaniu wpłaty na koncie bankowym Sprzedawcy. Materiały cyfrowe wysyłane są drogą elektroniczną na adres e-mail podany w zamówieniu, zazwyczaj w ciągu 24h roboczych.</p>
+              
+              <h4>5. Reklamacje i odstąpienie od umowy</h4>
+              <p>W przypadku produktów cyfrowych, które nie są zapisane na nośniku materialnym, prawo odstąpienia od umowy nie przysługuje w momencie, gdy spełnianie świadczenia rozpoczęło się za wyraźną zgodą konsumenta przed upływem terminu do odstąpienia od umowy.</p>
+              
+              <h4>6. Ochrona danych osobowych</h4>
+              <p>Administratorem danych osobowych jest P&P Consulting. Dane przetwarzane są wyłącznie w celu realizacji zamówienia i nie są udostępniane podmiotom trzecim bez zgody Klienta.</p>
+            </div>
+
+            <div className="p-6 border-t border-slate-100 bg-slate-50 rounded-b-2xl text-center">
+              <button 
+                onClick={() => setShowLegal(false)}
+                className="px-6 py-2 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition-colors"
+              >
+                Rozumiem i akceptuję
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* MODAL BLOGA */}
       {activePost && (
         <div className="fixed inset-0 z-[70] flex items-center justify-center px-4 bg-slate-900/90 backdrop-blur-md p-4 animate-in fade-in duration-300 overflow-y-auto">
           <div className="bg-white rounded-2xl shadow-2xl max-w-3xl w-full relative my-8 flex flex-col max-h-[90vh]">
