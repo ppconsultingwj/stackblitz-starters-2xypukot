@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Menu, X, ChevronRight, User, BookOpen, Mail, Phone, Linkedin, CheckCircle, Award, TrendingUp, Target, BarChart2, ArrowRight, Brain, Cpu, Leaf, Send, ShoppingCart, Layout, Map, ClipboardList, HelpCircle, FileText } from 'lucide-react';
+import { Menu, X, ChevronRight, User, BookOpen, Mail, Phone, Linkedin, CheckCircle, Award, TrendingUp, Target, BarChart2, ArrowRight, Brain, Cpu, Leaf, Send, ShoppingCart, Layout, Map, ClipboardList, HelpCircle, FileText, Shield } from 'lucide-react';
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeModal, setActiveModal] = useState(null);
   const [activePost, setActivePost] = useState(null);
   const [showLegal, setShowLegal] = useState(false);
+  const [showPrivacy, setShowPrivacy] = useState(false); // NOWY STAN DLA POLITYKI PRYWATNOŚCI
   
   const [modalFormStatus, setModalFormStatus] = useState('idle'); 
   const [contactFormStatus, setContactFormStatus] = useState('idle');
@@ -30,7 +31,7 @@ const App = () => {
     linkedin: "https://www.linkedin.com/in/wojciech-jakubiak-11835963/"
   };
 
-  // Logotypy firm - PLIKI DO WGRANIA
+  // Logotypy firm
   const trustedCompanies = [
     { name: "Trans.EU", logo: "logo_trans.png" },
     { name: "Smartlunch", logo: "logo_smartlunch.png" },
@@ -269,17 +270,34 @@ const App = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <div className="flex-shrink-0 flex items-center cursor-pointer" onClick={() => window.scrollTo(0,0)}>
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-lg" style={{background: `linear-gradient(135deg, ${colors.blue}, ${colors.green})`}}>
-                P&P
-              </div>
-              <div className="flex flex-col">
+            
+            {/* ZMIANA: Zamiast tekstu P&P, wstawiamy obrazek logo */}
+            <div className="flex items-center gap-4">
+              <img 
+                src="logo2.jpg" 
+                alt="P&P Consulting Logo" 
+                className="h-16 w-auto object-contain"
+                onError={(e) => {
+                  e.target.style.display = 'none'; // Jeśli plik nie istnieje, ukryj obrazek
+                  e.target.nextSibling.style.display = 'flex'; // I pokaż fallback tekstowy
+                }}
+              />
+              
+              {/* Fallback (gdyby obrazek się nie załadował) */}
+              <div className="hidden flex-col" id="logo-fallback">
                 <span className="text-xl font-extrabold tracking-tight leading-none" style={{color: colors.textMain}}>
                   P&P <span style={{color: colors.blue}}>Consulting</span>
                 </span>
-                <span className="text-[10px] uppercase tracking-widest text-slate-400 font-bold mt-0.5">Process & Project Management</span>
+              </div>
+
+              {/* Subtitle - Zostaje zgodnie z życzeniem */}
+              <div className="flex flex-col justify-center h-full pt-1 border-l-2 border-slate-200 pl-4">
+                <span className="text-[10px] uppercase tracking-widest text-slate-400 font-bold leading-tight">
+                  Process &<br/>Project Management
+                </span>
               </div>
             </div>
+
           </div>
 
           <div className="hidden md:flex space-x-8 items-center">
@@ -733,7 +751,12 @@ const App = () => {
             <div>
               <h4 className="text-white font-bold mb-4">Legal</h4>
               <ul className="space-y-2 text-sm">
-                <li><a href="#" className="hover:text-blue-400 transition-colors">Polityka Prywatności</a></li>
+                <li>
+                  {/* LINK DO POLITYKI PRYWATNOŚCI */}
+                  <button onClick={() => setShowPrivacy(true)} className="hover:text-blue-400 transition-colors text-left">
+                    Polityka Prywatności
+                  </button>
+                </li>
                 <li>
                   <button onClick={() => setShowLegal(true)} className="hover:text-blue-400 transition-colors text-left">
                     Regulamin Sklepu
@@ -858,6 +881,58 @@ const App = () => {
                 className="px-6 py-2 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition-colors"
               >
                 Rozumiem i akceptuję
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* NOWY MODAL POLITYKI PRYWATNOŚCI */}
+      {showPrivacy && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center px-4 bg-slate-900/90 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full flex flex-col max-h-[85vh]">
+            <div className="p-6 border-b border-slate-100 flex justify-between items-center">
+              <h3 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+                <Shield size={20} className="text-green-600" /> Polityka Prywatności
+              </h3>
+              <button 
+                onClick={() => setShowPrivacy(false)}
+                className="text-slate-400 hover:text-slate-600 transition-colors bg-slate-100 rounded-full p-1"
+              >
+                <X size={20} />
+              </button>
+            </div>
+            
+            <div className="p-8 overflow-y-auto prose prose-slate prose-sm text-slate-600">
+              <h4>1. Administrator Danych</h4>
+              <p>Administratorem danych osobowych zbieranych za pośrednictwem strony internetowej jest <strong>P&P Consulting Wojciech Jakubiak</strong>.</p>
+              
+              <h4>2. Cele przetwarzania danych</h4>
+              <p>Dane osobowe (imię, nazwisko, adres e-mail, numer telefonu) przetwarzane są wyłącznie w celu:</p>
+              <ul>
+                <li>Udzielenia odpowiedzi na zapytania przesłane przez formularz kontaktowy.</li>
+                <li>Realizacji zamówień na produkty cyfrowe i szkolenia (wystawienie faktury, przesłanie materiałów).</li>
+              </ul>
+              
+              <h4>3. Podstawa prawna</h4>
+              <p>Podstawą przetwarzania danych jest zgoda Użytkownika (przy wysyłaniu zapytania) oraz konieczność wykonania umowy (przy realizacji zamówienia).</p>
+              
+              <h4>4. Odbiorcy danych</h4>
+              <p>Dane mogą być udostępniane podmiotom przetwarzającym je na nasze zlecenie, np. dostawcom usług księgowych lub hostingowych, jednak tylko w zakresie niezbędnym do realizacji celów biznesowych.</p>
+              
+              <h4>5. Prawa Użytkownika</h4>
+              <p>Każdy Użytkownik ma prawo do wglądu w swoje dane, ich sprostowania, usunięcia lub ograniczenia przetwarzania. W tym celu należy skontaktować się z Administratorem pod adresem e-mail: {personalInfo.email}.</p>
+              
+              <h4>6. Pliki Cookies</h4>
+              <p>Strona wykorzystuje pliki cookies w celach statystycznych i funkcjonalnych, aby zapewnić prawidłowe działanie serwisu. Użytkownik może w każdej chwili zmienić ustawienia przeglądarki dotyczące cookies.</p>
+            </div>
+
+            <div className="p-6 border-t border-slate-100 bg-slate-50 rounded-b-2xl text-center">
+              <button 
+                onClick={() => setShowPrivacy(false)}
+                className="px-6 py-2 bg-green-600 text-white rounded-lg font-bold hover:bg-green-700 transition-colors"
+              >
+                Rozumiem
               </button>
             </div>
           </div>
