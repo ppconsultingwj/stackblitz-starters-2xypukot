@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
-import { Menu, X, ChevronRight, User, BookOpen, Mail, Phone, Linkedin, CheckCircle, Award, TrendingUp, Target, BarChart2, ArrowRight, Brain, Cpu, Leaf } from 'lucide-react';
+import { Menu, X, ChevronRight, User, BookOpen, Mail, Phone, Linkedin, CheckCircle, Award, TrendingUp, Target, BarChart2, ArrowRight, Brain, Cpu, Leaf, Send } from 'lucide-react';
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeModal, setActiveModal] = useState(null);
   const [activePost, setActivePost] = useState(null);
-  const [formStatus, setFormStatus] = useState('idle');
+  
+  // Rozdzielone stany dla dwóch formularzy
+  const [modalFormStatus, setModalFormStatus] = useState('idle'); 
+  const [contactFormStatus, setContactFormStatus] = useState('idle');
+
+  // TWOJE ID FORMSPREE
+  const FORMSPREE_ID = 'xykgndeb'; 
 
   const colors = {
     blue: '#2EA3D8',
@@ -156,16 +162,44 @@ const App = () => {
     }
   ];
 
-  const handleRegisterSubmit = (e) => {
-    e.preventDefault();
-    setFormStatus('submitting');
-    setTimeout(() => {
-      setFormStatus('success');
-      setTimeout(() => {
-        setFormStatus('idle');
-        setActiveModal(null);
-      }, 3000);
-    }, 1500);
+  // --- FUNKCJA WYSYŁAJĄCA DANE DO FORMSPREE ---
+  const submitToFormspree = async (event, setStatus) => {
+    event.preventDefault();
+    setStatus('submitting');
+    
+    const form = event.target;
+    const data = new FormData(form);
+    
+    // Zabezpieczenie na wypadek braku ID
+    if (!FORMSPREE_ID || FORMSPREE_ID === 'TUTAJ_WKLEJ_SWOJ_KOD') {
+      alert("Kod formularza nie został poprawnie skonfigurowany!");
+      setStatus('error');
+      return;
+    }
+
+    try {
+      const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: "POST",
+        body: data,
+        headers: {
+            'Accept': 'application/json'
+        }
+      });
+      
+      if (response.ok) {
+        setStatus('success');
+        form.reset();
+        // Resetujemy status po 5 sekundach
+        setTimeout(() => {
+          setStatus('idle');
+          if (activeModal) setActiveModal(null);
+        }, 5000);
+      } else {
+        setStatus('error');
+      }
+    } catch (error) {
+      setStatus('error');
+    }
   };
 
   const Navigation = () => (
@@ -466,31 +500,55 @@ const App = () => {
                     </a>
                   </div>
                 </div>
+                
+                 <div className="flex items-start space-x-5">
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center text-white shrink-0 shadow-lg" style={{backgroundColor: colors.blue}}>
+                    <Phone size={24} />
+                  </div>
+                  <div>
+                    <p className="text-sm text-slate-400 mb-1 uppercase tracking-wider font-bold">Telefon</p>
+                     <p className="text-xl font-semibold hover:text-blue-300 transition-colors">{personalInfo.phone}</p>
+                  </div>
+                </div>
               </div>
             </div>
 
             <div className="bg-white rounded-2xl p-8 text-slate-800 shadow-2xl">
               <h3 className="text-2xl font-bold mb-6 text-slate-900">Formularz kontaktowy</h3>
-              <form className="space-y-5">
-                <div>
-                  <label className="block text-sm font-bold text-slate-700 mb-2">Imię i nazwisko</label>
-                  <input type="text" className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:outline-none focus:border-blue-500 focus:bg-white transition-all" placeholder="Np. Jan Kowalski" />
+
+              {contactFormStatus === 'success' ? (
+                <div className="bg-green-50 p-6 rounded-xl border border-green-200 text-center animate-in fade-in zoom-in">
+                  <CheckCircle className="mx-auto text-green-500 mb-4" size={48} />
+                  <h4 className="text-xl font-bold text-green-800 mb-2">Wiadomość wysłana!</h4>
+                  <p className="text-green-700">Dziękuję za kontakt. Odpiszę najszybciej jak to możliwe.</p>
                 </div>
-                <div>
-                  <label className="block text-sm font-bold text-slate-700 mb-2">Email</label>
-                  <input type="email" className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:outline-none focus:border-blue-500 focus:bg-white transition-all" placeholder="jan@firma.pl" />
-                </div>
-                <div>
-                  <label className="block text-sm font-bold text-slate-700 mb-2">Wiadomość</label>
-                  <textarea rows="4" className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:outline-none focus:border-blue-500 focus:bg-white transition-all" placeholder="Dzień dobry..."></textarea>
-                </div>
-                <button
-                  className="w-full text-white font-bold py-4 rounded-xl transition-all flex justify-center items-center shadow-lg hover:shadow-xl hover:transform hover:-translate-y-1"
-                  style={{background: `linear-gradient(90deg, ${colors.blue}, ${colors.green})`}}
-                >
-                  Wyślij wiadomość
-                </button>
-              </form>
+              ) : (
+                <form onSubmit={(e) => submitToFormspree(e, setContactFormStatus)} className="space-y-5">
+                  {/* Ukryte pole tematu dla Formspree */}
+                  <input type="hidden" name="_subject" value="Nowa wiadomość ze strony P&P Consulting" />
+
+                  <div>
+                    <label className="block text-sm font-bold text-slate-700 mb-2">Imię i nazwisko</label>
+                    <input name="name" required type="text" className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:outline-none focus:border-blue-500 focus:bg-white transition-all" placeholder="Np. Jan Kowalski" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-bold text-slate-700 mb-2">Email</label>
+                    <input name="email" required type="email" className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:outline-none focus:border-blue-500 focus:bg-white transition-all" placeholder="jan@firma.pl" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-bold text-slate-700 mb-2">Wiadomość</label>
+                    <textarea name="message" required rows="4" className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:outline-none focus:border-blue-500 focus:bg-white transition-all" placeholder="Dzień dobry..."></textarea>
+                  </div>
+                  <button
+                    disabled={contactFormStatus === 'submitting'}
+                    className="w-full text-white font-bold py-4 rounded-xl transition-all flex justify-center items-center shadow-lg hover:shadow-xl hover:transform hover:-translate-y-1 disabled:opacity-70 disabled:cursor-not-allowed"
+                    style={{background: `linear-gradient(90deg, ${colors.blue}, ${colors.green})`}}
+                  >
+                    {contactFormStatus === 'submitting' ? 'Wysyłanie...' : 'Wyślij wiadomość'}
+                  </button>
+                  {contactFormStatus === 'error' && <p className="text-red-500 text-sm text-center">Wystąpił błąd. Spróbuj ponownie lub napisz maila bezpośrednio.</p>}
+                </form>
+              )}
             </div>
           </div>
 
@@ -511,7 +569,7 @@ const App = () => {
               <X size={20} />
             </button>
 
-            {formStatus === 'success' ? (
+            {modalFormStatus === 'success' ? (
               <div className="text-center py-8 animate-in zoom-in duration-300">
                 <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
                   <CheckCircle size={40} style={{color: colors.green}} />
@@ -528,18 +586,23 @@ const App = () => {
                 <p className="text-slate-600 mb-6 text-sm">
                   Jesteś zainteresowany tym tematem dla swojej firmy? Zostaw swój adres e-mail, a prześlę Ci szczegółową ofertę i zakres merytoryczny.
                 </p>
-                <form onSubmit={handleRegisterSubmit} className="space-y-4">
+
+                <form onSubmit={(e) => submitToFormspree(e, setModalFormStatus)} className="space-y-4">
+                  {/* Ukryte pole tematu - dynamicznie wstawiamy nazwę szkolenia */}
+                  <input type="hidden" name="_subject" value={`Zapytanie o szkolenie: ${trainings.find(t => t.id === activeModal)?.title}`} />
+
                   <div>
-                    <input required placeholder="Twój adres Email" type="email" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:border-blue-500 outline-none transition-all" />
+                    <input name="email" required placeholder="Twój adres Email" type="email" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:border-blue-500 outline-none transition-all" />
                   </div>
                   <button
-                    disabled={formStatus === 'submitting'}
+                    disabled={modalFormStatus === 'submitting'}
                     type="submit"
-                    className="w-full text-white font-bold py-3 rounded-xl transition-all mt-2 shadow-lg hover:shadow-xl"
+                    className="w-full text-white font-bold py-3 rounded-xl transition-all mt-2 shadow-lg hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed"
                     style={{backgroundColor: colors.green}}
                   >
-                    {formStatus === 'submitting' ? 'Wysyłanie...' : 'Wyślij zapytanie'}
+                    {modalFormStatus === 'submitting' ? 'Wysyłanie...' : 'Wyślij zapytanie'}
                   </button>
+                  {modalFormStatus === 'error' && <p className="text-red-500 text-sm text-center">Błąd wysyłania. Spróbuj ponownie.</p>}
                 </form>
               </>
             )}
