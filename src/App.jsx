@@ -219,7 +219,7 @@ const App = () => {
       id: 3,
       title: "Japanese lesson with Wojtek (Process-San-Shogun) 🙂 Lesson no.3",
       date: "10.01.2025",
-      image: "jidoka_ai.webp",
+      image: "jidoka_ai.png",
       excerpt: "We’ve already covered Muda (waste) and cleaned up our desks with 5S. Now, it is time to face the inevitable future. Everyone is talking about it—ChatGPT, Copilot, Gemini... But how does this connect to our Japanese philosophy?",
       content: (
         <div className="space-y-4 text-slate-700 leading-relaxed">
