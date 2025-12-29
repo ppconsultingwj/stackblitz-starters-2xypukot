@@ -129,108 +129,32 @@ const App = () => {
           <p>We invite you to a Japanese lesson with Wojtek (Process-San-Shogun) 🙂</p>
 
           <h4 className="text-xl font-bold mt-6" style={{color: colors.blue}}>Let's start with the basics:</h4>
-          <ul className="list-disc pl-5 space-y-4">
-            <li>
-              <strong>San (さん)</strong>, Mr. Miss.<br/>
-              The most common Japanese suffix, used for both women and men. San is a commonly used equivalent of the Polish "pan / pani" or English “Mr. / Miss”, which can be added to names, surnames, and occupational names (e.g. kokku-san = chef or toshokanin-san = librarian)
-            </li>
-            <li>
-              <strong>Shogun (将軍)</strong>, shogun<br/>
-              Commander-in-chief, general, commander-in-chief of the armed forces.<br/>
-              Colloquially: Someone wild, everywhere, knows everything, someone cunning.<br/>
-              <em>“- On Friday he managed to go to the cinema, museum and go to Warsaw”<br/>
-              - What a SHOGUN he is! 😊”</em>
-            </li>
+          <ul className="list-disc pl-5 space-y-2">
+            <li><strong>San (さん)</strong>, Mr. Miss. The most common Japanese suffix...</li>
+            <li><strong>Shogun (将軍)</strong>, commander-in-chief. Colloquially: Someone wild, everywhere, knows everything...</li>
           </ul>
 
           <h4 className="text-xl font-bold mt-6" style={{color: colors.blue}}>And Today's hero… MUDA (無駄)</h4>
-          <p>This is a Japanese word meaning "futility", "uselessness", or "wastefulness".<br/>
-          And colloquially: Muda is simply a waste/loss. Something we do, whether in life or at work, and it does not bring value to our customers, even if that customer is ourselves 😊</p>
+          <p>This is a Japanese word meaning "futility", "uselessness", or "wastefulness". Colloquially: Muda is simply a waste/loss. Something we do, whether in life or at work, and it does not bring value to our customers.</p>
 
-          <h4 className="text-xl font-bold text-slate-900 mt-6">OK, let's focus on MUDA!</h4>
-          <p>To better understand what Muda is, we can divide it into categories.</p>
+          <h4 className="text-xl font-bold text-slate-900 mt-6">Let's focus on the 7 Wastes (Muda):</h4>
 
-          <div className="grid gap-6 mt-6">
-            <div className="bg-slate-50 p-5 rounded-lg border-l-4" style={{borderColor: colors.green}}>
-              <h5 className="font-bold text-lg" style={{color: colors.green}}>Overproduction</h5>
-              <p className="text-sm mt-1">Producing products, services or information in isolation from reported demand.</p>
-              <div className="mt-3 text-xs text-slate-600 bg-white p-2 rounded border border-slate-100">
-                <p><strong>Life:</strong> Why do we need so much food for Christmas… Who will eat it….?</p>
-                <p><strong>Business:</strong> Producing report than no one read or need, Double checking</p>
-              </div>
+          <div className="grid gap-4 mt-4">
+            <div className="bg-slate-50 p-4 rounded-lg border-l-4" style={{borderColor: colors.green}}>
+              <h5 className="font-bold" style={{color: colors.green}}>1. Overproduction</h5>
+              <p className="text-sm mt-1">Producing reports that no one reads.</p>
             </div>
-
-            <div className="bg-slate-50 p-5 rounded-lg border-l-4" style={{borderColor: colors.green}}>
-              <h5 className="font-bold text-lg" style={{color: colors.green}}>Inventory</h5>
-              <p className="text-sm mt-1">More than the minimum necessary amount of raw materials, semi-finished products, work in progress and finished goods.</p>
-              <div className="mt-3 text-xs text-slate-600 bg-white p-2 rounded border border-slate-100">
-                <p><strong>Life:</strong> out-of-date food, out-of-fashion clothing, parcels packed in extra cartons which are 4 times too big</p>
-                <p><strong>Business:</strong> obsolete files and documentation</p>
-              </div>
+            <div className="bg-slate-50 p-4 rounded-lg border-l-4" style={{borderColor: colors.green}}>
+              <h5 className="font-bold" style={{color: colors.green}}>2. Waiting</h5>
+              <p className="text-sm mt-1">Waiting for approvals or signatures.</p>
             </div>
-
-            <div className="bg-slate-50 p-5 rounded-lg border-l-4" style={{borderColor: colors.green}}>
-              <h5 className="font-bold text-lg" style={{color: colors.green}}>Errors and defects</h5>
-              <p className="text-sm mt-1">Defective products and improperly performed services.</p>
-              <div className="mt-3 text-xs text-slate-600 bg-white p-2 rounded border border-slate-100">
-                <p><strong>Life:</strong> Okay, I'm a master at this... why do I need a manual... Unfortunately the truth is that it is easier to break something than to fix it later...</p>
-                <p><strong>Business:</strong> Reworks, incomplete data, wrong data, etc.</p>
-              </div>
-            </div>
-
-            <div className="bg-slate-50 p-5 rounded-lg border-l-4" style={{borderColor: colors.green}}>
-              <h5 className="font-bold text-lg" style={{color: colors.green}}>Waiting</h5>
-              <p className="text-sm mt-1">Unnecessary waiting in the process of waiting machines or people for the necessary materials, tools, instructions or information necessary to perform the work.</p>
-              <div className="mt-3 text-xs text-slate-600 bg-white p-2 rounded border border-slate-100">
-                <p><strong>Life:</strong> The time when nothing is happening... waiting for the "impulse" that will enable us to take action... For example, the bus is late...</p>
-                <p><strong>Business:</strong> Waiting for approvals or signatures, waitting on meetings for all attendance.</p>
-              </div>
-            </div>
-
-            <div className="bg-slate-50 p-5 rounded-lg border-l-4" style={{borderColor: colors.green}}>
-              <h5 className="font-bold text-lg" style={{color: colors.green}}>Over processing</h5>
-              <p className="text-sm mt-1">Any activity that is not necessary to produce a product or service with the parameters and quality level required by the customer.</p>
-              <div className="mt-3 text-xs text-slate-600 bg-white p-2 rounded border border-slate-100">
-                <p><strong>Life:</strong> - I made you coffee just the way you like it. - Damn dude, I've already had two, I won't drink a third.</p>
-                <p><strong>Business:</strong> Entering the same data in a few systems, multiplying signatures or approvals.</p>
-              </div>
-            </div>
-
-            <div className="bg-slate-50 p-5 rounded-lg border-l-4" style={{borderColor: colors.green}}>
-              <h5 className="font-bold text-lg" style={{color: colors.green}}>Unnecessary transportation</h5>
-              <p className="text-sm mt-1">Unnecessary movement of products or materials both within and between organizations.</p>
-              <div className="mt-3 text-xs text-slate-600 bg-white p-2 rounded border border-slate-100">
-                <p><strong>Life:</strong> - Damn, I could have planned this route better, I spent another hour driving back and forth...</p>
-                <p><strong>Business:</strong> Complex information hard to get.</p>
-              </div>
-            </div>
-
-            <div className="bg-slate-50 p-5 rounded-lg border-l-4" style={{borderColor: colors.green}}>
-              <h5 className="font-bold text-lg" style={{color: colors.green}}>Unnecessary movement</h5>
-              <p className="text-sm mt-1">Any movements of people that are not directly related to adding value.</p>
-              <div className="mt-3 text-xs text-slate-600 bg-white p-2 rounded border border-slate-100">
-                <p><strong>Life:</strong> For example, while cleaning your apartment you are constantly looking for helpful accessories that are in different places... Did you know that apparently every person wastes an average of 90 minutes every day finding the things they need?</p>
-                <p><strong>Business:</strong> searching for files, sorting through data.</p>
-              </div>
-            </div>
-
-            <div className="bg-slate-50 p-5 rounded-lg border-l-4 border-red-500">
-              <h5 className="font-bold text-lg text-red-700">Unused potential of employees</h5>
-              <p className="text-sm mt-1">The organization's failure to use the ideas, creativity, competences, talents, as well as the available working time of its employees, and their performance of tasks below their competences.</p>
-              <div className="mt-3 text-xs text-slate-600 bg-white p-2 rounded border border-slate-100">
-                <p><strong>Life:</strong> This is because my mother told me to clean and at the same time I could practice basketball to get to the NBA 😊</p>
-                <p><strong>Business:</strong> not involving people to solve their problems, doing “easy” job by highly paid employees.</p>
-              </div>
+            <div className="bg-slate-50 p-4 rounded-lg border-l-4 border-red-500">
+              <h5 className="font-bold text-red-700">8. Unused potential</h5>
+              <p className="text-sm mt-1">Not involving people to solve their problems.</p>
             </div>
           </div>
 
-          <p className="mt-8 italic text-slate-600 border-t pt-4">
-            That's all for today!<br/>
-            If you go so far write in the comments how it's DELIVERY in Japanese?<br/><br/>
-            Regards,<br/>
-            ありがとう。<br/>
-            <strong>Process - SAN - Shogun Wojtek 🙂</strong>
-          </p>
+          <p className="mt-6 italic">That's all for today! If you go so far write in the comments how it's DELIVERY in Japanese?<br/>Regards, Process - SAN - Shogun Wojtek 🙂</p>
         </div>
       )
     },
@@ -251,19 +175,19 @@ const App = () => {
           <div className="space-y-6 mt-4">
             <div>
               <h5 className="text-lg font-bold" style={{color: colors.green}}>1. Sort (seiri)</h5>
-              <p>The first step in the 5S methodology is to sort. Sort: when in doubt, throw it out, delete it or archive it. Have you looked at your computer’s hard drive lately? Do you keep different versions of the same document? Do you struggle to identify the latest version? Think about the amount of time wasted looking through files, trying to find the correct one. How about the time wasted in finding the latest version of a file on a shared drive. Would your work benefit from having only the documents used on a regular basis stored in the area? Would your teammates benefit from having only a single copy of relevant materials present?</p>
+              <p>The first step in the 5S methodology is to sort. Sort: when in doubt, throw it out, delete it or archive it. Have you looked at your computer’s hard drive lately? Do you keep different versions of the same document? Do you struggle to identify the latest version? Think about the amount of time wasted looking through files, trying to find the correct one.</p>
             </div>
             <div>
               <h5 className="text-lg font-bold" style={{color: colors.green}}>2. Set (in order) (seiton)</h5>
-              <p>Once you have removed any unnecessary items you can arrange and organize the things that you need in a way that is systematic and logical. decide where to keep necessary items and then organize accordingly. File shares, folder structures and naming conventions arranged in a logical fashion to promote easy access is a very large opportunity . . . in any organization.<br/>Even in digital platforms, arranging virtual files on computers applies to this practice. Organizing digital files into folders with clear labels allows employees to locate documents swiftly, minimizing time spent searching.</p>
+              <p>Once you have removed any unnecessary items you can arrange and organize the things that you need in a way that is systematic and logical. decide where to keep necessary items and then organize accordingly.</p>
             </div>
             <div>
               <h5 className="text-lg font-bold" style={{color: colors.green}}>3. Shine (seiso)</h5>
-              <p>This step relates to ensuring that your workspace is kept clean and is properly maintained. Do yourself a favor . . . look at any data storage location and ask “is the area clean and free of data clutter?”. Is my CRM basket/Essa workflow clean from trash?. There are a number of reasons to regularly clean files etc. First and foremost, clutter leads to waste. Second, storage costs money. Third, it exposes the organization to unnecessary risk. Get in the habit of cleaning at appropriate predetermined intervals.</p>
+              <p>This step relates to ensuring that your workspace is kept clean and is properly maintained. Do yourself a favor . . . look at any data storage location and ask “is the area clean and free of data clutter?”.</p>
             </div>
             <div>
               <h5 className="text-lg font-bold" style={{color: colors.green}}>4. Standardize (seiketsu)</h5>
-              <p>The fourth step in the 5S methodology is to standardize. This step involves creating a set of guidelines and procedures for maintaining the workspace. This includes documenting the previous three steps and establishing a regular schedule for their implementation..<br/>In business: aim to standardize day-to-day work and execute processes according to SOPs. Develop database naming conventions, folder and file name standards, etc. Regularly review methods, and as new methods are developed, document them quickly and have them adopted by others.</p>
+              <p>The fourth step in the 5S methodology is to standardize. This step involves creating a set of guidelines and procedures for maintaining the workspace.</p>
             </div>
             <div>
               <h5 className="text-lg font-bold" style={{color: colors.green}}>5. Sustain (shitsuke)</h5>
@@ -293,13 +217,81 @@ const App = () => {
     },
     {
       id: 3,
-      title: "Kiedy potrzeba zmiany staje się kulturą firmy?",
-      date: "10.12.2024",
-      image: null,
-      excerpt: "W Trans.eu budujemy świadomość, że doskonalenie to nie jednorazowy projekt, ale nawyk. Jak zaszczepić to w zespole?",
+      title: "Japanese lesson with Wojtek (Process-San-Shogun) 🙂 Lesson no.3",
+      date: "10.01.2025",
+      image: "jidoka_ai.webp",
+      excerpt: "We’ve already covered Muda (waste) and cleaned up our desks with 5S. Now, it is time to face the inevitable future. Everyone is talking about it—ChatGPT, Copilot, Gemini... But how does this connect to our Japanese philosophy?",
       content: (
-        <div className="text-slate-700">
-          <p>Treść artykułu o kulturze zmiany w organizacji...</p>
+        <div className="space-y-4 text-slate-700 leading-relaxed">
+          <p><strong>#Jidoka #AI #ProcessOptimization</strong></p>
+          <p>We’ve already covered Muda (waste) and cleaned up our desks with 5S. Now, it is time to face the inevitable future. Everyone is talking about it—ChatGPT, Copilot, Gemini... But how does this connect to our Japanese philosophy?</p>
+          <p>We invite you to a Japanese lesson with Wojtek (Process-San-Shogun) 🙂</p>
+          
+          <h4 className="text-xl font-bold mt-6" style={{color: colors.blue}}>Today's word is... Jidoka (自働化).</h4>
+          <p>In classic Lean manufacturing, Jidoka means "automation with a human touch" or "intelligent automation."</p>
+          <p>It’s not just about a machine working blindly. It’s about a machine that is smart enough to stop when something goes wrong and ask a human for help.</p>
+          
+          <h4 className="text-xl font-bold mt-6" style={{color: colors.blue}}>And today, Jidoka = AI in our Processes.</h4>
+          <p>Many people fear AI, thinking it is Skynet coming to take our jobs. Colloquially: AI is your new, super-fast intern who never sleeps, drinks coffee, or complains about Mondays. But... you still need to be the Manager (the Shogun!) to guide it.</p>
+          
+          <h4 className="text-xl font-bold text-slate-900 mt-6">Let's see how we can use Jidoka (AI) to eliminate the Muda we talked about in Lesson 1!</h4>
+
+          <div className="grid gap-6 mt-6">
+            <div className="bg-slate-50 p-5 rounded-lg border-l-4" style={{borderColor: colors.green}}>
+              <h5 className="font-bold text-lg" style={{color: colors.green}}>1. The Muda of "Blank Page Syndrome"</h5>
+              <p className="text-sm mt-1">How much time do we waste staring at a blinking cursor?</p>
+              <div className="mt-3 text-xs text-slate-600 bg-white p-2 rounded border border-slate-100">
+                <p><strong>Life:</strong> You need to write a birthday wish for your aunt... You stare at the card for 20 minutes.</p>
+                <p><strong>Business:</strong> You need to write a project summary... You spend 30 minutes just writing the first sentence.</p>
+                <p className="mt-2 font-semibold" style={{color: colors.blue}}>The AI Fix: Ask AI for a draft. "Write 3 versions of a project update." Boom. Done in 5 seconds. You just edit it. That is Jidoka—machine does the heavy lifting, you add the human touch.</p>
+              </div>
+            </div>
+
+            <div className="bg-slate-50 p-5 rounded-lg border-l-4" style={{borderColor: colors.green}}>
+              <h5 className="font-bold text-lg" style={{color: colors.green}}>2. The Muda of Data Analysis (Over-processing)</h5>
+              <p className="text-sm mt-1">Crunching numbers manually is so 2010.</p>
+              <div className="mt-3 text-xs text-slate-600 bg-white p-2 rounded border border-slate-100">
+                <p><strong>Life:</strong> You have a PDF bank statement... You spend hours with a calculator.</p>
+                <p><strong>Business:</strong> You have a CSV file with 10,000 rows. You are manually filtering, creating Pivot Tables, and crying inside.</p>
+                <p className="mt-2 font-semibold" style={{color: colors.blue}}>The AI Fix: Upload the file to a secure AI tool. Ask: "What are the top 3 trends here?" or "Visualize the sales drop." The machine detects the anomaly (Jidoka) and presents it to you. You make the decision.</p>
+              </div>
+            </div>
+
+            <div className="bg-slate-50 p-5 rounded-lg border-l-4" style={{borderColor: colors.green}}>
+              <h5 className="font-bold text-lg" style={{color: colors.green}}>3. The Muda of Searching (Unnecessary Motion)</h5>
+              <p className="text-sm mt-1">Remember the 90 minutes wasted looking for things?</p>
+              <div className="mt-3 text-xs text-slate-600 bg-white p-2 rounded border border-slate-100">
+                <p><strong>Life:</strong> "Google, what is the name of that movie where the guy eats the pizza on the roof?"</p>
+                <p><strong>Business:</strong> Searching through 50 folders of SOPs (Standard Operating Procedures) to find one specific compliance rule.</p>
+                <p className="mt-2 font-semibold" style={{color: colors.blue}}>The AI Fix: Building a simple internal Knowledge Base (Chatbot). You ask: "What is the procedure for invoice approval?" It gives you the answer instantly. No clicking through folders.</p>
+              </div>
+            </div>
+
+            <div className="bg-slate-50 p-5 rounded-lg border-l-4" style={{borderColor: colors.green}}>
+              <h5 className="font-bold text-lg" style={{color: colors.green}}>4. The Muda of Errors (Defects)</h5>
+              <div className="mt-3 text-xs text-slate-600 bg-white p-2 rounded border border-slate-100">
+                <p><strong>Life:</strong> Sending a text to your boss with a terrible typo because of autocorrect.</p>
+                <p><strong>Business:</strong> Sending a proposal with the wrong company name copied from a previous template. (We have all been there... 😉).</p>
+                <p className="mt-2 font-semibold" style={{color: colors.blue}}>The AI Fix: AI is the ultimate "Poka-Yoke" (mistake-proofing). It scans your text, your code, or your data patterns and flags inconsistencies before you hit send.</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-8 p-4 bg-red-50 border border-red-200 rounded-lg">
+             <p className="font-bold text-red-800 mb-2 text-center uppercase">👇👇👇 Please remember 👇👇👇</p>
+             <p className="font-bold text-slate-800">AI is a tool, not a replacement.</p>
+             <p className="text-sm mt-2">In the concept of Jidoka, the "Human Touch" is the most important part. AI can generate text, code, or images, but it can also hallucinate (lie confidently!).<br/>If you let AI run your process without supervision, you are not a Process-San-Shogun, you are just reckless.</p>
+             <p className="text-sm mt-2 font-bold">Use AI to remove the "robot" from the human. Let the AI do the boring, repetitive, calculation stuff, so YOU can focus on creativity, strategy, and empathy.</p>
+          </div>
+
+          <p className="mt-8 italic text-slate-600 border-t pt-4">
+            That's all for today!<br/>
+            If you made it this far, do you know the Japanese word for "Artificial Intelligence"?<br/>
+            It is Jinkō Chinō (人工知能).<br/><br/>
+            Regards,<br/>
+            Sayōnara (さようなら)<br/>
+            <strong>Process - SAN - Shogun Wojtek 🙂</strong>
+          </p>
         </div>
       )
     }
