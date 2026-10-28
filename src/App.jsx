@@ -381,6 +381,13 @@ const App = () => {
               </a>
             ))}
             <a
+              href="/warsztaty-ai/"
+              className="px-3 py-2 rounded-md text-sm font-bold transition-colors hover:bg-slate-50"
+              style={{color: colors.darkBlue}}
+            >
+              Warsztaty AI
+            </a>
+            <a
               href="#oferta"
               className="text-white px-6 py-2.5 rounded-full text-sm font-bold transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
               style={{background: `linear-gradient(90deg, ${colors.blue}, ${colors.green})`}}
@@ -413,6 +420,14 @@ const App = () => {
                 {item}
               </a>
             ))}
+            <a
+              href="/warsztaty-ai/"
+              className="block px-4 py-3 rounded-lg text-base font-bold hover:bg-slate-50"
+              style={{color: colors.darkBlue}}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Warsztaty AI
+            </a>
           </div>
         </div>
       )}
@@ -453,6 +468,36 @@ const App = () => {
             </a>
             <a href="#narzędzia" className="px-8 py-4 bg-white border text-slate-600 font-bold rounded-xl hover:bg-slate-50 transition-all flex items-center justify-center shadow-sm">
               Narzędzia i Szablony
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* DWIE ŚCIEŻKI: DLA FIRM / WARSZTATY AI */}
+      <section className="py-16 bg-slate-50 border-t border-slate-100">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-2 gap-6">
+            <a href="#oferta" className="group bg-white rounded-2xl shadow-xl shadow-slate-200/40 overflow-hidden border border-slate-100 hover:-translate-y-1 transition-transform duration-300 flex flex-col">
+              <div className="h-2" style={{background: colors.blue}}></div>
+              <div className="p-8 flex-1 flex flex-col">
+                <Target size={32} className="mb-4" style={{color: colors.blue}} />
+                <h2 className="text-2xl font-bold text-slate-900 mb-2">Dla firm</h2>
+                <p className="text-slate-600 mb-6 flex-1">Lean Six Sigma, optymalizacja procesów, wdrożenia AI i zarządzanie projektami.</p>
+                <span className="inline-flex items-center font-bold" style={{color: colors.darkBlue}}>
+                  Zobacz ofertę <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
+                </span>
+              </div>
+            </a>
+            <a href="/warsztaty-ai/" className="group bg-white rounded-2xl shadow-xl shadow-slate-200/40 overflow-hidden border border-slate-100 hover:-translate-y-1 transition-transform duration-300 flex flex-col">
+              <div className="h-2" style={{background: colors.green}}></div>
+              <div className="p-8 flex-1 flex flex-col">
+                <Brain size={32} className="mb-4" style={{color: colors.green}} />
+                <h2 className="text-2xl font-bold text-slate-900 mb-2">Warsztaty AI</h2>
+                <p className="text-slate-600 mb-6 flex-1">„Nie takie AI straszne” – praktyczne warsztaty dla seniorów, rodziców i instytucji. Prostym językiem, na własnym telefonie.</p>
+                <span className="inline-flex items-center font-bold" style={{color: colors.darkBlue}}>
+                  Poznaj warsztaty <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
+                </span>
+              </div>
             </a>
           </div>
         </div>
@@ -817,6 +862,7 @@ const App = () => {
                 <li><a href="#oferta" className="hover:text-blue-400 transition-colors">Oferta B2B</a></li>
                 <li><a href="#narzędzia" className="hover:text-blue-400 transition-colors">Narzędzia</a></li>
                 <li><a href="#wiedza" className="hover:text-blue-400 transition-colors">Blog</a></li>
+                <li><a href="/warsztaty-ai/" className="hover:text-blue-400 transition-colors">Warsztaty AI</a></li>
               </ul>
             </div>
             <div>

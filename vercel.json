@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/warsztaty-ai", "destination": "/warsztaty-ai/index.html" }
+  ]
+}
