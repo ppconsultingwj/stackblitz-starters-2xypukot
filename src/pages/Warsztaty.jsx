@@ -1,22 +1,11 @@
 import React from 'react';
-import { Phone, Mail, Sun, Moon, CheckCircle, AlertTriangle, Users, Clock, Smartphone, HelpCircle, ArrowLeft, Award, MapPin, FileText, Monitor, Gift } from 'lucide-react';
+import { Phone, Mail, Sun, Moon, CheckCircle, AlertTriangle, Users, Clock, Smartphone, HelpCircle, ArrowLeft, Award, MapPin, FileText, Monitor, Gift, Send } from 'lucide-react';
+import Layout, { focusRing, btnPrimary, btnSecondary, SectionLabel } from '../components/Layout.jsx';
+import { colors, contact, contactUrl } from '../site.js';
 
 // Podstrona "Nie takie AI straszne" – warsztaty AI dla każdego.
 // Celowo większa czcionka, wysoki kontrast i duże przyciski (odbiorcy: m.in. seniorzy).
 const Warsztaty = () => {
-  const colors = {
-    blue: '#2EA3D8',
-    green: '#6CC24A',
-    darkBlue: '#1B6CA8',
-    textMain: '#334155',
-    bgLight: '#F8FAFC'
-  };
-
-  const contact = {
-    phoneDisplay: '501 341 095',
-    phoneHref: 'tel:+48501341095',
-    email: 'ppconsultingwj@gmail.com'
-  };
 
   const brightSides = [
     'Napisać list, pismo do urzędu albo życzenia dla wnuczki',
@@ -93,45 +82,8 @@ const Warsztaty = () => {
     }
   ];
 
-  // Wspólne style: duże, kontrastowe przyciski z wyraźnym obramowaniem fokusu
-  const focusRing = 'focus:outline-none focus-visible:ring-4 focus-visible:ring-offset-2 focus-visible:ring-amber-400';
-  const btnPrimary = `inline-flex items-center justify-center gap-3 min-h-[60px] px-8 py-4 rounded-xl text-white text-xl font-bold shadow-lg hover:shadow-xl hover:brightness-110 transition-all ${focusRing}`;
-  const btnSecondary = `inline-flex items-center justify-center gap-3 min-h-[60px] px-8 py-4 rounded-xl bg-white border-2 text-xl font-bold shadow-sm hover:bg-slate-50 transition-all ${focusRing}`;
-
-  const SectionLabel = ({ children, color }) => (
-    <span className="font-bold tracking-widest text-sm md:text-base uppercase mb-3 block" style={{ color }}>{children}</span>
-  );
-
   return (
-    <div className="min-h-screen font-sans text-slate-800 text-lg md:text-xl leading-relaxed" style={{ backgroundColor: colors.bgLight }}>
-
-      {/* NAGŁÓWEK */}
-      <header className="fixed top-0 left-0 w-full bg-white/95 backdrop-blur-md shadow-sm z-50 border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20 gap-4">
-            <a href="/" className={`flex items-center gap-4 rounded-lg ${focusRing}`} aria-label="P&P Consulting – strona główna">
-              <img src="/logo2.jpg" alt="P&P Consulting Logo" className="h-14 md:h-16 w-auto object-contain" />
-              <span className="hidden sm:flex flex-col justify-center h-full pt-1 border-l-2 border-slate-200 pl-4 text-xs uppercase tracking-widest text-slate-500 font-bold leading-tight">
-                Process &<br />Project Management
-              </span>
-            </a>
-
-            <nav className="flex items-center gap-2 md:gap-6" aria-label="Menu główne">
-              <a href="/" className={`hidden md:inline-block text-slate-700 hover:text-slate-900 hover:bg-slate-50 px-3 py-2 rounded-md text-lg font-semibold ${focusRing}`}>
-                Dla firm
-              </a>
-              <a href="/warsztaty-ai/" aria-current="page" className={`hidden md:inline-block px-3 py-2 rounded-md text-lg font-bold ${focusRing}`} style={{ color: colors.darkBlue }}>
-                Warsztaty AI
-              </a>
-              <a href={contact.phoneHref} className={`inline-flex items-center gap-2 min-h-[48px] px-4 md:px-6 py-2 rounded-full text-white text-lg font-bold shadow-lg ${focusRing}`} style={{ backgroundColor: colors.darkBlue }}>
-                <Phone size={20} aria-hidden="true" /> <span>Zadzwoń</span>
-              </a>
-            </nav>
-          </div>
-        </div>
-      </header>
-
-      <main>
+    <Layout>
         {/* 1. NAGŁÓWEK SEKCJI */}
         <section className="pt-28 md:pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-white">
           <div className="absolute top-0 right-0 w-[800px] h-[800px] rounded-full blur-3xl opacity-10 -translate-y-1/2 translate-x-1/3" style={{ backgroundColor: colors.blue }}></div>
@@ -374,22 +326,13 @@ const Warsztaty = () => {
               <a href={`mailto:${contact.email}`} className={`flex items-center justify-center gap-4 min-h-[72px] px-6 py-4 rounded-2xl border-2 border-white text-xl md:text-2xl font-bold hover:bg-white/10 transition-colors break-all ${focusRing}`}>
                 <Mail size={30} className="flex-shrink-0" aria-hidden="true" /> {contact.email}
               </a>
+              <a href={contactUrl('warsztat-instytucja')} className={`flex items-center justify-center gap-4 min-h-[72px] px-6 py-4 rounded-2xl border-2 border-white text-xl md:text-2xl font-bold hover:bg-white/10 transition-colors ${focusRing}`}>
+                <Send size={30} className="flex-shrink-0" aria-hidden="true" /> Wyślij zapytanie przez formularz
+              </a>
             </div>
           </div>
         </section>
-      </main>
-
-      {/* STOPKA */}
-      <footer className="bg-slate-900 text-slate-300 py-12 border-t border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6 text-base">
-          <p>© 2025 P&P Consulting. Wszelkie prawa zastrzeżone.</p>
-          <nav className="flex gap-6" aria-label="Stopka">
-            <a href="/" className={`inline-flex items-center min-h-[48px] px-2 hover:text-white underline underline-offset-4 rounded ${focusRing}`}>Dla firm</a>
-            <a href="/warsztaty-ai/" className={`inline-flex items-center min-h-[48px] px-2 hover:text-white underline underline-offset-4 rounded ${focusRing}`}>Warsztaty AI</a>
-          </nav>
-        </div>
-      </footer>
-    </div>
+    </Layout>
   );
 };
 
